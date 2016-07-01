@@ -1,0 +1,5 @@
+assets/
+.DS_Store
+node_modules/
+public/js/
+npm-debug.log

@@ -1,0 +1,14 @@
+//-------------------------------------------------------------------
+//  TYPOGRAPHY
+//-------------------------------------------------------------------
+
+h1
+  +type($crass, 300, 3rem, 1.5, 4px, center, #aab498, uppercase, normal)
+  a
+    @extend %smooth 
+    color: #aab498!important
+    &:hover
+      opacity: .5
+
+p
+  +type($monospace, 400, 1rem, 1.65, normal, left, $type-color, none, normal)

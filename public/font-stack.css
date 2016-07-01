@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'crass';
+  src: url('imgs/fonts/infini/romain/infini-romain.eot');
+  src: url('imgs/fonts/infini/romain/infini-romain.eot?#iefix') format('embedded-opentype'),
+       url('imgs/fonts/infini/romain/infini-romain.otf') format('otf'),
+       url('imgs/fonts/infini/romain/infini-romain.woff') format('woff'),
+       url('imgs/fonts/infini/romain/infini-romain.ttf') format('truetype'),
+       url('imgs/fonts/infini/romain/infini-romain.svg#crassregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
