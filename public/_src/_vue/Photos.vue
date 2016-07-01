@@ -1,9 +1,9 @@
 <template lang="jade">
   section#photos
-    ul#col-left
-      li(v-for="photo_l in photos_left" v-bind:style="{ backgroundImage: 'url(' + photo_l.image + ')' }")
-    ul#col-right
-      li(v-for="photo_r in photos_right" v-bind:style="{ backgroundImage: 'url(' + photo_r.image + ')' }")
+    ul.left
+      li.chunk-l(v-for="photo_l in photos_left" v-bind:style="{ backgroundImage: 'url(' + photo_l.image + ')' }")
+    ul.right
+      li.chunk-r(v-for="photo_r in photos_right" v-bind:style="{ backgroundImage: 'url(' + photo_r.image + ')' }")
 </template>
 
 <script>
@@ -34,18 +34,25 @@
   @import "../_sass/utilities/_utilities.sass"
     
   section#photos
-    @extend %clearfix
+    overflow: hidden
+    position: absolute
+    top: 0
+    left: 0
     display: block
-    min-height: 100vh
+    height: 100vh
     width: 100vw
     z-index: 10
     ul
       width: 50vw
-      float: left 
-      position: relative
+      display: block 
+      position: absolute
       li
         @extend %full-bg
         width: 100%
         height: 100vh
+    .left
+      left: 0
+    .right
+      right: 0
 
 </style>
