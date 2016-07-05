@@ -43,6 +43,7 @@
     width: 100vw
     z-index: 10
     ul
+      @extend %cubic-bezier-transition
       width: 50vw
       display: block 
       position: absolute
