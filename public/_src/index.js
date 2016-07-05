@@ -35,30 +35,7 @@ import mousewheel from 'jquery-mousewheel'
 
 // SmoothScroll
 var initVendor = function() {
-  //scrollAppend();
-  //reverseScroll();
-  reverseAnimation();
-}
-
-// Scroll Append Infinity
-var scrollAppend = function(){
-  setInterval(appendContent, 10);
-  
-  var b = $('#photos'),
-      tic = 0,
-      content = b.html();
-  
-  function appendContent() {
-    if($(window).scrollTop() + $(window).height() * 2 > $(document).height()) {
-      b.html(b.html() + b.html());
-      tic = tic + 1;
-      if(tic == 3) {
-        tic = 0;
-        $(b).empty();
-        $(b).append(content);
-      }
-    }
-  }
+  reverseScroll();
 }
 
 // Scroll Append Two directions Infinity
@@ -66,77 +43,54 @@ var reverseScroll = function(){
   var rightHeight = $('.right').height(),
       leftHeight = $('.right').height(),
       chunkHeight = $('.chunk-l').height(),
-      wh = window.innerHeight / 35,
-      tac = 0,
+      rate = 45,
+      progress = 0,
       initHeight = (leftHeight - chunkHeight),
-      b = $('#photos'),
-      content = b.html();
+      container = $('#photos'),
+      content = container.html();
 
-      console.log(chunkHeight , initHeight , rightHeight);
-
-  var leftInit = function(){
-    $('.left').css('top', -(initHeight) );
+  var positionInit = function(){
+    $('.left').css('top', -(initHeight) - chunkHeight );
+    $('.right').css('top', chunkHeight );
   }
 
-  var marginAdd = function(){
-    tac = tac + wh;
-    $('.right').css('margin-top', -(tac) );
-    $('.left').css('margin-top', tac );
-    console.log(tac);
-
-    if( tac >= (leftHeight + chunkHeight)){
-      tac = 0;
-      $(b).empty();
-      $(b).append(content);
-      leftInit();
-      console.log('reset');
+  var fwdScroll = function(){
+    progress = progress + rate;
+    $('.right').css('margin-top', -(progress) );
+    $('.left').css('margin-top', progress );
+    if( progress >= (leftHeight + chunkHeight)){
+      progress = 0;
+      $(container).empty();
+      $(container).append(content);
+      positionInit();
     }
   }
 
-  leftInit();
+  var revScroll = function(){
+    progress = progress - rate;
+    $('.right').css('margin-top', -(progress) );
+    $('.left').css('margin-top', progress );
+    if( progress <= 0){
+      progress = 0;
+    }
+  }
 
-  $('#photos').on( 'DOMMouseScroll mousewheel', function ( event ) {
-    marginAdd();
+  positionInit();
+
+  $(container).bind({'mousewheel DOMMouseScroll onmousewheel touchmove scroll': 
+    function(e) {
+      if (e.target.id == 'el') return;
+      e.preventDefault();
+      e.stopPropagation();
+
+      //Determine Direction
+      if (e.originalEvent.wheelDelta && e.originalEvent.wheelDelta >= 0) {
+        revScroll();
+      } else {
+        fwdScroll();
+      }
+    }
   });
-}
-
-// Scroll Append Two directions Infinity
-var reverseAnimation = function(){ 
-  var rightHeight = $('.right').height(),
-      leftHeight = $('.right').height(),
-      chunkHeight = $('.chunk-l').height(),
-      wh = window.innerHeight / 25,
-      tac = 0,
-      initHeight = (leftHeight - chunkHeight),
-      b = $('#photos'),
-      content = b.html();
-
-      console.log(chunkHeight , initHeight , rightHeight);
-
-  var leftInit = function(){
-    $('.left').css('top', -(initHeight) );
-  }
-
-  var marginAdd = function(){
-    tac = tac + wh;
-    $('.right').css('margin-top', -(tac) );
-    $('.left').css('margin-top', tac );
-
-    if( tac >= (leftHeight + chunkHeight)){
-      tac = 0;
-      $(b).empty();
-      $(b).append(content);
-      $('.left').css('top', -(leftHeight));
-      $('.right').css('top', chunkHeight);
-    }
-  }
-
-  leftInit();
-
-  setInterval(function() {
-    marginAdd();
-  }, 10);
-
 }
 
 // RUN FLAVOR FUNCTIONS
