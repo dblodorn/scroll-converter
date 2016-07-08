@@ -1,7 +1,6 @@
 <template lang="jade">
   header#top
-    h1 {{title}}
-  router-view
+    h1#title {{title}}
 </template>
 
 <script>
@@ -29,5 +28,7 @@
     padding: 3rem 1rem 0
     z-index: 12000
     pointer-events: none
+    h1
+      text-align: center
 
 </style>

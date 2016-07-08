@@ -3,3 +3,4 @@ assets/
 node_modules/
 public/js/
 npm-debug.log
+gulp-tasks/deploy.js

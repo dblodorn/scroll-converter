@@ -1,31 +1,14 @@
 import './_sass/main.sass'
 
-import smoothScroll from 'smooth-scroll'
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 
-//-------------------------------------------------------------------
-// VUE APP
-//-------------------------------------------------------------------
+import Shell from './_vue/Shell.vue'
+import Photos from './_vue/Photos.vue'
 
-Vue.use(VueRouter)
-
-var App = Vue.extend({})
-
-var router = new VueRouter()
-
-router.map({
-    '/': {
-      component: require('./_vue/Shell.vue'),
-      subRoutes: {
-        '/': {
-          component: require('./_vue/Photos.vue')
-        }
-      }
-    }
+new Vue({
+  el: 'body',
+  components: {Shell, Photos}
 })
-
-router.start(App, 'body')
 
 //-------------------------------------------------------------------
 // FLAVOR FUNCTIONS
@@ -82,6 +65,8 @@ var reverseScroll = function(){
       if (e.target.id == 'el') return;
       e.preventDefault();
       e.stopPropagation();
+
+      $('#title').html(progress);
 
       //Determine Direction
       if (e.originalEvent.wheelDelta && e.originalEvent.wheelDelta >= 0) {
